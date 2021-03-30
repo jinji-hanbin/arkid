@@ -8,6 +8,7 @@ exclude: >
         oneid/settings.py|
         docker-compose/be/settings.py|
         drf_expiring_authtoken/.*|
+        arkid/settings.py|
     )$
 repos:
   - repo: local
