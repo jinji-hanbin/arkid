@@ -43,15 +43,15 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_hotp',
     'django_otp.plugins.otp_static',
-    'corsheaders',    
+    'corsheaders',
     'rest_framework',
-    # 'rest_framework.authtoken',
-    'drf_expiring_authtoken',
-    'drf_spectacular',    
-    'tenant',    
+    'rest_framework.authtoken',
+    'rest_framework_expiring_authtoken',
+    'drf_spectacular',
+    'tenant',
     'inventory',
     'app',
-    'oauth2_provider',    
+    'oauth2_provider',
     'webhook',
     'siteadmin',
     'provisioning',
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'api',
     'extension_root.github',
     'extension_root.gitee',
+    'extension_root.feishu',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +109,7 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'drf_expiring_authtoken.authentication.ExpiringTokenAuthentication',
+        'rest_framework_expiring_authtoken.authentication.ExpiringTokenAuthentication',
     ),
     # 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -202,3 +203,8 @@ LDAP_PORT = 389
 SLAPD_PASSWORD = 'admin'
 SLAPD_DOMAIN = 'dc=example,dc=org'
 AUTH_USER_MODEL = 'inventory.User'
+
+import os
+# 引入settings_local.py 本地配置文件
+if os.path.exists(os.path.join(BASE_DIR, 'settings_local.py')):
+    exec(open(os.path.join(BASE_DIR, 'settings_local.py')).read())
